@@ -6,4 +6,4 @@ Labs:
 
 - [Lab 0: Getting Started](/lab_0/readme)
 
-Eli Did it 
+Eli Did it right?
