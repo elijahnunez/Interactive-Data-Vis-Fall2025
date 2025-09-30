@@ -5,3 +5,5 @@ Welcome to the CUNY Interactive Data Visualization course repository for fall 20
 Labs:
 
 - [Lab 0: Getting Started](/lab_0/readme)
+
+Eli Did it 
