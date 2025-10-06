@@ -6,3 +6,4 @@ Labs:
 
 - [Lab 0: Getting Started](/lab_0/readme)
 # hello
+I wanna show my text
