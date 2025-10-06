@@ -6,4 +6,5 @@ Labs:
 
 - [Lab 0: Getting Started](/lab_0/readme)
 
-Eli Did it right?
+# Elijah Lab 0
+## what can one do? 
