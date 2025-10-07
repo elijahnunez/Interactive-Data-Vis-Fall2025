@@ -13,7 +13,7 @@ Labs:
 <h1 class="card">Giants</h1>
 <h1 class="card">Jets</h1>
 </h1>
-</div>
+
 
 <!-- <div class ="tip"> this is a tip</div> -->
 ```js
