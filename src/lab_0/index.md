@@ -59,7 +59,7 @@ This page is where you can iterate. Follow the lab instructions in the [readme.m
 ```js
 import * as Inputs from "npm:@observablehq/inputs"
 
-const colorInput = Inputs.color({label: "Select a Color for Bad Bunny", value: "#ff00aa" });
+const colorInput = Inputs.color({label: "Select a Color for", value: "#ff00aa" });
 
 const text = document.createElement("h1");
 text.textContent = "Bad Bunny";
