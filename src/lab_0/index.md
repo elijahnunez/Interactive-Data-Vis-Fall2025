@@ -10,7 +10,7 @@ This page is where you can iterate. Follow the lab instructions in the [readme.m
 <img src="Bad Bunny.jpeg" alt="Bad Bunny with PAVA" width="600" height="400">
 
 
-`
+
 <table style="width:100%; max-width:560px; border-collapse:collapse; font-family:system-ui, sans-serif; font-size:14px;">
   <caption style="caption-side:top; padding:6px 0; font-weight:600;">Bad Bunny — Selected Singles & Release Dates</caption>
   <thead>
@@ -54,6 +54,25 @@ This page is where you can iterate. Follow the lab instructions in the [readme.m
     </tr>
   </tbody>
 </table>
-`
+
+
+```js
+import * as Inputs from "npm:@observablehq/inputs"
+
+const colorInput = Inputs.color({label: "Select a Color for Bad Bunny", value: "#ff00aa" });
+
+const text = document.createElement("h1");
+text.textContent = "Bad Bunny";
+text.style.transition = "color 0.3s";
+text.style.color = "#ff00aa";
+
+colorInput.addEventListener("input", (event) => {
+  text.style.color = event.target.value;
+});
+```
+
+
+${colorInput}${text}
+
 
 
