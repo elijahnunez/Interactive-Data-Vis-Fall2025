@@ -59,9 +59,9 @@ This page is where you can iterate. Follow the lab instructions in the [readme.m
 
 ```js
 import * as Plot from "npm:@observablehq/plot";
-import * as Inputs from "npm:@observablehq/inputs";
+import { slider } from "npm:@observablehq/inputs";
 
-const minStreamsSlider = view(Inputs.slider([1.2, 1.9], {
+const minStreamsSlider = view(slider([1.2, 1.9], {
   step: 0.05,
   value: 1.3,
   label: "Minimum Streams (in Billions)"
@@ -113,11 +113,4 @@ display(Plot.plot({
   marginLeft: 60,
   marginBottom: 80
 }));
-
-
-
-
-
-
-
 ```
