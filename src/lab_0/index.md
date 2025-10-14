@@ -55,3 +55,10 @@ This page is where you can iterate. Follow the lab instructions in the [readme.m
   </tbody>
 </table>
 `
+
+<div class="grid grid-cols-2-3">
+   <div class="card">[30-year card]</div>
+   <div class="card">[15-year card]</div>
+   <div class="card grid-colspan-2 grid-rowspan-2">[Stepped line chart]</div>
+</div>
+
