@@ -42,7 +42,7 @@ Plot.plot({
 ## What is the Bee's Knees?
 
 ```js 
-const pollinators = FileAttachment("data/pollinator_activity_data.csv").csv()
+const pollinators = FileAttachment("data/pollinator_activity_data.csv").csv({Typed: true})
 ```
 
 ```js
