@@ -21,7 +21,7 @@ Plot.plot({
     ]
     })
 ``` -->
-
+<!-- 
 ```js
 Inputs.table(aapl)
 ```
@@ -37,4 +37,18 @@ Plot.plot({
         Plot.ruleY([0])
         
     ]})
+``` -->
+
+## What is the Bee's Knees?
+
+```js 
+const pollinators = FileAttachment("data/pollinator_activity_data.csv").csv()
 ```
+
+```js
+Inputs.table(pollinators)
+```
+
+* What is the body mass and wing span distribution of each pollinator species observed?
+* What is the ideal weather (conditions, temperature, etc) for pollinating?
+* Which flower has the most nectar production?
