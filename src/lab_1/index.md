@@ -31,7 +31,7 @@ height: 400,
     label: "Average Wing Span (mm)",
     ticks: 20,
     grid: true,
-     domain: [0, 60]
+     domain: [0, 50]
   },
   color: {
     legend: true,
