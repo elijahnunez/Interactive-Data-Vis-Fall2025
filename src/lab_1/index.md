@@ -19,26 +19,26 @@ Inputs.table(pollinators)
 
 ```js 
 Plot.plot({
-
-width: 900,
-height: 600,
+width: 800,
+height: 400,
   x: {
     label: "Average Body Mass (g)",
     ticks: 1,
     grid: true,
-    tickFormat: ".1f"
+   domain: [0, 0.7],
   },
   y: {
     label: "Average Wing Span (mm)",
     ticks: 20,
     grid: true,
-    tickFormat: ".0f"
+     domain: [0, 60]
   },
   color: {
     legend: true,
     label: "Pollinator Species"
   },
   marks: [
+    Plot.frame(),
     Plot.dot(pollinators, {
       x: "avg_body_mass_g",
       y: "avg_wing_span_mm",
@@ -55,7 +55,6 @@ height: 600,
 All pollinator groups prefer wamer temperatures when pollinating 
 ```js
 Plot.plot({
-
 width: 900,
 height: 600,
   facet: {
@@ -111,7 +110,6 @@ Plot.plot({
 ```
 
 * Which flower has the most nectar production?
-
 ```js
 Plot.plot({
   marks: [
@@ -119,5 +117,4 @@ Plot.plot({
   ]
 })
 ```
-
 Sunflowers have the highest nectar prodcution in the data set.
