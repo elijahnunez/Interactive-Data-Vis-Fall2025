@@ -60,16 +60,16 @@ height: 600,
   facet: {
     data: pollinators,
     y: "pollinator_group",
-    label: null
   },
-  marginLeft: 60,
   x: { label: "Temperature" },
   y: { label: "Humidity" },
+
   color: {
     legend: true,
     label: "Total Visit Count"
   },
   marks: [
+    Plot.frame(),
     Plot.rect(
       pollinators,
       Plot.bin(
