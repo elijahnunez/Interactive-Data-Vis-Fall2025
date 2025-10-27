@@ -19,31 +19,33 @@ Inputs.table(pollinators)
 
 ```js 
 Plot.plot({
+
+width: 900,
+height: 600,
+  x: {
+    label: "Average Body Mass (g)",
+    ticks: 1,
+    grid: true,
+    tickFormat: ".1f"
+  },
+  y: {
+    label: "Average Wing Span (mm)",
+    ticks: 20,
+    grid: true,
+    tickFormat: ".0f"
+  },
+  color: {
+    legend: true,
+    label: "Pollinator Species"
+  },
   marks: [
     Plot.dot(pollinators, {
       x: "avg_body_mass_g",
       y: "avg_wing_span_mm",
-      stroke: "pollinator_species"
+      fill: "pollinator_species",
+      tip: true
     })
-  ],
-  
-  // Updated x-axis format
-  x: { 
-    label: "Average Body Mass (g)",
-    ticks: 10,
-    tickFormat: ".3f"   // Formats to 3 decimal places
-  },
-  
-  // Updated y-axis format
-  y: { 
-    label: "Average Wing Span (mm)",
-    ticks: 8,
-    tickFormat: ".3f"   // Formats to 3 decimal places
-  },
-  
-  grid: true,
-  width: window.innerWidth,
-  height: 0.6 * window.innerHeight
+  ]
 })
 ```
 
@@ -53,36 +55,35 @@ Plot.plot({
 All pollinator groups prefer wamer temperatures when pollinating 
 ```js
 Plot.plot({
-  inset: 8,
-  grid: true,
-  color: { legend: true }, // Will color the dots by pollinator_group
 
-  // --- Y-Axis is now a percentage ---
-  y: {
-    label: "Proportion of Visits",
-    grid: true
+width: 900,
+height: 600,
+  facet: {
+    data: pollinators,
+    y: "pollinator_group",
+    label: null
   },
-  
-  x: {
-    label: "Temperature (°C)",
-    tickFormat: d => `${d}°`,
+  marginLeft: 60,
+  x: { label: "Temperature" },
+  y: { label: "Humidity" },
+  color: {
+    scheme: "viridis",
+    legend: true,
+    label: "Total Visit Count"
   },
-
   marks: [
- 
-    Plot.dot(pollinators, 
-      Plot.normalizeY(
-        Plot.binX(
-          { y: "total visit" }, 
-          {
-            x: "temperature",
-            y: "visit_count",
-            stroke: "pollinator_group" 
-          }
-        )
+    Plot.rect(
+      pollinators,
+      Plot.bin(
+        { fill: "sum" },
+        {
+          x: "temperature",
+          y: "humidity",
+          fill: "visit_count",
+          tip: true
+        }
       )
-    ),
-    Plot.ruleY([0, 1]) 
+    )
   ]
 })
 ```
