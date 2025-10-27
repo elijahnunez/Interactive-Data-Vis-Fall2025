@@ -52,7 +52,7 @@ height: 400,
 ## What is the ideal weather (conditions, temperature, etc) for pollinating?
 
 ### Visit Count by Temperature
-All pollinator groups prefer wamer temperatures when pollinating 
+All pollinator groups prefer wamer temperatures when pollinating. Larger bees prefer more humid temperatures, while medium and smaller bees, prefer lower humidity. 
 ```js
 Plot.plot({
 width: 900,
@@ -66,7 +66,6 @@ height: 600,
   x: { label: "Temperature" },
   y: { label: "Humidity" },
   color: {
-    scheme: "viridis",
     legend: true,
     label: "Total Visit Count"
   },
