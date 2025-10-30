@@ -17,11 +17,19 @@ export default {
     },
     {
       name: "Lab 1: Prolific Pollinators",
-      open: true,
+      open: false,
       pages: [
         { name: "Instructions", path: "/lab_1/readme" },
         { name: "Dashboard", path: "/lab_1/index" },
         { name: "notes", path: "/lab_1/notes" },
+      ],
+    },
+      {
+      name: "Lab 2: Subway Staffing",
+      open: true,
+      pages: [
+        { name: "Instructions", path: "/lab_2/readme" },
+        { name: "Dashboard", path: "/lab_2/index" },
       ],
     },
   ],
