@@ -21,6 +21,7 @@ export default {
       pages: [
         { name: "Instructions", path: "/lab_1/readme" },
         { name: "Dashboard", path: "/lab_1/index" },
+        { name: "notes", path: "/lab_1/notes" },
       ],
     },
   ],
