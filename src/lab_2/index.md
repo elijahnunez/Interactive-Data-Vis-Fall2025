@@ -3,8 +3,6 @@ title: "Lab 2: Subway Staffing"
 toc: true
 ---
 
-
-
 <!-- Import Data -->
 ```js
 const incidents = FileAttachment("./data/incidents.csv").csv({ typed: true })
@@ -12,7 +10,6 @@ const local_events = FileAttachment("./data/local_events.csv").csv({ typed: true
 const upcoming_events = FileAttachment("./data/upcoming_events.csv").csv({ typed: true })
 const ridership = FileAttachment("./data/ridership.csv").csv({ typed: true })
 ```
-
 <!-- Include current staffing counts from the prompt -->
 
 ```js
@@ -45,13 +42,20 @@ const currentStaffing = {
 }
 ```
 
-* How did local events impact ridership in summer 2025? What effect did the July 15th fare increase have?
-* How do the stations compare when it comes to response time? Which are the best, which are the worst?
-* Which three stations need the most staffing help for next summer based on the 2026 event calendar?
-* If you had to prioritize one station to get increased staffing, which would it be and why?
+```js
+const staffingTable = Object.entries(currentStaffing).map(([station, staffing]) => {
+  return { station: station, staffing: staffing };
+});
+```
+
+### How did local events impact ridership in summer 2025? What effect did the July 15th fare increase have?
 
 ```js
 Plot.plot({
+  color:{
+    legend: true
+  },
+  marginLeft: 100,
   y: {
     grid: true,
     label: "Total Daily Ridership"
@@ -64,74 +68,298 @@ Plot.plot({
   },
   marks: [
     Plot.ruleY([0]),
-
-    // 1. Draw the line for total ENTRANCES
     Plot.line(ridership, Plot.groupX(
       {y: "sum"},
       {
         x: "date",
         y: "entrances",
-        stroke: "Entrances",
         tip: true
       }
     )),
-    
-    // 2. Draw the line for total EXITS
+    Plot.ruleY([0]),
     Plot.line(ridership, Plot.groupX(
       {y: "sum"},
       {
         x: "date",
         y: "exits",
-        stroke: "Exits",
-        tip: true 
+        stroke: "#9ecae1",
+        tip: true,
+        legend: true
       }
     )),
-
-    // 3. Add a vertical rule for the FARE INCREASE
-    Plot.ruleX([new Date("2025-07-15")], {
+    Plot.ruleX( 
+      [new Date("2025-07-15")], {
       stroke: "red",
       strokeDasharray: "4,4"
     }),
-    
-    // 4. Add a label for the FARE INCREASE
-    Plot.text(["July 15th Fare Increase"], {
-      x: new Date("2025-07-15"),
-      fill: "red",
-      textAnchor: "start",
-      dy: -10,
-      dx: 5
-    }),
-    
-    // 5. NEW: Add vertical rules for LOCAL EVENTS
-    Plot.ruleX(local_events, {
-      x: "date",
-      stroke: "blue",
-      strokeDasharray: "2,2",
-      strokeOpacity: 0.5
-    }),
-    
-    // 6. NEW: Add text labels for LOCAL EVENTS
-    Plot.text(local_events, {
-      x: "date",
-      text: "event_name",
-      fill: "blue",
-      rotate: -50,         // Rotate text to prevent overlap
-      textAnchor: "start", // Anchor text to the start (bottom) of the label
-      y: 1000,             // Place text at a low point on the chart
-      fontSize: 10,
-      // Add a tip to see event details on hover
-      tip: {
-        format: {
-          x: false, // Don't show the date in the tip (it's redundant)
-          y: false,
-          text: false,
-          fill: false,
-          fontSize: false,
-          rotate: false,
-          textAnchor: false
-        }
+    Plot.text(
+      [{ date: new Date("2025-07-15"), label: "July 15th fare increse" }], 
+      {
+        x: "date",
+        text: "label",
+        fill: "red", 
+        frameAnchor: "left", 
+        dx: 10,
+        textBaseline: "top"
       }
-    })
+    )
+    ]
+      })
+```
+Almost 100,000 less enterances occured after the July 15th fare increase.
+
+
+
+### How do the stations compare when it comes to response time? Which are the best, which are the worst?
+<!-- 
+```js
+Inputs.table(incidents)
+``` -->
+
+
+```js
+const filteredIncidents = selectedSeverity === "All"
+    ? incidents // If "All" is selected, use the original data
+    : incidents.filter(d => d.severity === selectedSeverity); // Otherwise, filter
+
+  // 2. Return the plot, now using the 'filteredIncidents'
+  return Plot.plot({
+    marginLeft: 120,
+    marks: [
+      Plot.ruleX([0]),
+      Plot.tickX(
+        filteredIncidents, // Use the filtered data
+        {x: "response_time_minutes", y: "station", strokeOpacity: 0.3, tip: true}
+      ),
+      Plot.tickX(
+        filteredIncidents, // Use the filtered data
+        Plot.groupY(
+          {x: "mean"},
+          {x: "response_time_minutes", y: "station", stroke: "red", strokeWidth: 4, sort: {y: "x"}}
+        )
+      )
+    ]
+  })
+```
+
+```js
+Plot.plot({
+  marginLeft: 120,
+  marks: [
+    Plot.ruleX([0]),
+    Plot.tickX(
+      incidents,
+      {x: "response_time_minutes", y: "station", strokeOpacity: 0.3,tip: true}
+    ),
+    Plot.tickX(
+      incidents,
+      Plot.groupY(
+        {x: "mean"},
+        {x: "response_time_minutes", y: "station", stroke: "red", strokeWidth: 4, sort: {y: "x"}}
+      )
+    )
   ]
 })
 ```
+<!-- 
+```js 
+Plot.plot({
+  marginLeft: 120,
+  color: {
+    legend: true,
+scheme: "plasma"
+  },
+  marks:[
+    Plot.barX(incidents,
+      Plot.groupY(
+        {x: "count"},
+        {y:"station", x:"severity", fill:"severity", tip: true,
+          sort: {x: "y", reverse: true}
+        }
+    )
+)]
+})
+``` -->
+
+
+<!-- 
+```js
+Plot.plot({
+    y: {label: "expected_attendance (thousands)", transform: (y) => y / 1000},
+
+  marks: [
+    Plot.lineY(upcoming_events, {x: "date", y: "expected_attendance",   channels: {name: "name", sport: "sport"},
+tip: true})
+  ]
+})
+``` -->
+
+<!-- ```js
+Inputs.table(upcoming_events)
+``` -->
+
+
+<!-- ```js
+Plot.plot({
+     marginBottom: 130,
+     x: {
+    tickRotate: 45 // Rotates labels 45 degrees
+  },
+  marks: [
+    Plot.barY(staffingTable, 
+    Plot.groupX(
+      {y: "sum"},
+      {x: "station", y: "staffing",
+tip: true}))
+  ]
+})
+```
+
+```js
+Plot.plot({
+   marginBottom: 130,
+    y: {label: "expected_attendance (thousands)", transform: (y) => y / 1000},
+    x: {
+    tickRotate: 45 // Rotates labels 45 degrees
+  },
+  marks: [
+    Plot.barY(upcoming_events, 
+    Plot.groupX(
+      {y: "sum"},
+      {x: "nearby_station", y: "expected_attendance",
+tip: true}))
+  ]
+})
+``` -->
+
+### 3. Which three stations need the most staffing help for next summer based on the 2026 event calendar?
+### 3a. If you had to prioritize one station to get increased staffing, which would it be and why?
+
+```js
+const attendanceByStation = new Map();
+for (const event of upcoming_events) {
+  const station = event.nearby_station;
+  const attendance = event.expected_attendance;
+  attendanceByStation.set(station, (attendanceByStation.get(station) || 0) + attendance);
+}
+
+const combinedData = staffingTable.map(d => {
+  const station = d.station;
+  const staffing = d.staffing;
+  const attendance = attendanceByStation.get(station) || 0; 
+  
+  return {
+    station: station,
+    staffing: staffing,
+    attendance: attendance
+  };
+});
+```
+<!-- 
+```js
+Inputs.table(combinedData)
+``` -->
+
+```js
+
+Plot.plot({
+  color:{
+    legend: true,
+    scheme: "Reds"
+  },
+   marginBottom: 130,
+    x: {
+    tickRotate: 45 // Rotates labels 45 degrees
+  },
+  marks: [
+    Plot.barY(combinedData, 
+    Plot.groupX(
+      {y: "sum"},
+      {x: "station", y: "staffing", fill: "attendance",
+tip: true}))
+  ]
+})
+```
+
+Canal St., 34 St. - Penn Station, and Chambers St. all will the highest event attendence based off next summers event attendence. 
+
+Canal Street, will have the most event attendences but has the one of the lowest staffing, this station should be prioritized in recieveing more staff.
+
+
+div class="grid grid-cols-4">
+<div class="card"><span>a</span></div>
+<div class="card"><span>b</span></div>
+<div class="card"><span>c</span></div>
+<div class="card"><span>d</span></div>
+</div>
+
+<style>
+  .code {
+    font-family: monospace;
+    color: #333;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: 400;
+  }
+  </style>
+
+  <div class="card">
+  this is going to have <span class="code"> ${Plot.plot({
+  color:{
+    legend: true
+  },
+  marginLeft: 100,
+  y: {
+    grid: true,
+    label: "Total Daily Ridership"
+  },
+  x: {
+    label: "Date"
+  },
+  color: {
+    legend: true // Legend for Entrances/Exits
+  },
+  marks: [
+    Plot.ruleY([0]),
+    Plot.line(ridership, Plot.groupX(
+      {y: "sum"},
+      {
+        x: "date",
+        y: "entrances",
+        tip: true
+      }
+    )),
+    Plot.ruleY([0]),
+    Plot.line(ridership, Plot.groupX(
+      {y: "sum"},
+      {
+        x: "date",
+        y: "exits",
+        stroke: "#9ecae1",
+        tip: true,
+        legend: true
+      }
+    )),
+    Plot.ruleX( 
+      [new Date("2025-07-15")], {
+      stroke: "red",
+      strokeDasharray: "4,4"
+    }),
+    Plot.text(
+      [{ date: new Date("2025-07-15"), label: "July 15th fare increse" }], 
+      {
+        x: "date",
+        text: "label",
+        fill: "red", 
+        frameAnchor: "left", 
+        dx: 10,
+        textBaseline: "top"
+      }
+    )
+    ]
+      })}</span>
+  </div>
+
+
+
+

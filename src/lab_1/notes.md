@@ -1,4 +1,4 @@
-<!-- ```js
+<!-- <!-- ```js
 view(Inputs.table(diamonds))
 ```
 
@@ -177,4 +177,85 @@ svg.append("text")
 
 </script>
 </body>
-</html>
+</html> -->
+
+
+## Notes Nov 3
+
+<div class="grid grid-cols-4">
+<div class="card"><span>a</span></div>
+<div class="card"><span>b</span></div>
+<div class="card"><span>c</span></div>
+<div class="card"><span>d</span></div>
+</div>
+
+<style>
+  .code {
+    font-family: monospace;
+    color: #333;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: 400;
+  }
+  </style>
+
+  <div class="card">
+  this is going to have <span class="code"> ${Plot.plot({
+  color:{
+    legend: true
+  },
+  marginLeft: 100,
+  y: {
+    grid: true,
+    label: "Total Daily Ridership"
+  },
+  x: {
+    label: "Date"
+  },
+  color: {
+    legend: true // Legend for Entrances/Exits
+  },
+  marks: [
+    Plot.ruleY([0]),
+    Plot.line(ridership, Plot.groupX(
+      {y: "sum"},
+      {
+        x: "date",
+        y: "entrances",
+        tip: true
+      }
+    )),
+    Plot.ruleY([0]),
+    Plot.line(ridership, Plot.groupX(
+      {y: "sum"},
+      {
+        x: "date",
+        y: "exits",
+        stroke: "#9ecae1",
+        tip: true,
+        legend: true
+      }
+    )),
+    Plot.ruleX( 
+      [new Date("2025-07-15")], {
+      stroke: "red",
+      strokeDasharray: "4,4"
+    }),
+    Plot.text(
+      [{ date: new Date("2025-07-15"), label: "July 15th fare increse" }], 
+      {
+        x: "date",
+        text: "label",
+        fill: "red", 
+        frameAnchor: "left", 
+        dx: 10,
+        textBaseline: "top"
+      }
+    )
+    ]
+      })}</span>
+  </div>
+
+
+
+

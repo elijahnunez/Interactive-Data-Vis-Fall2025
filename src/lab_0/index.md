@@ -75,7 +75,7 @@ ${colorInput}${text}
 
 ```js
 const team = view(Inputs.select(["Giants", "Jets", "Eagles"], {
-abel: "Who will win the 2026 Superbowl?", value: "Giants"}))
+label: "Who will win the 2026 Superbowl?", value: "Giants"}))
 ```
 
 The ${team} will win the 2026 Superbowl.
