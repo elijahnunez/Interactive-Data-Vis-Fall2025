@@ -48,9 +48,6 @@ const staffingTable = Object.entries(currentStaffing).map(([station, staffing]) 
 });
 ```
 
-
-
-
 ```js
 const attendanceByStation = new Map();
 for (const event of upcoming_events) {
@@ -123,11 +120,14 @@ const combinedData = staffingTable.map(d => {
         )
       ]
     })}
-    <p>
+ 
+  </span>
+     <p>
       Almost 100,000 less enterances after the July 15th fare increase.
     </p>
-  </span>
 </div>
+
+
 
 <div class="card">
   <h1>How do the stations compare when it comes to response time? Which are the best, which are the worst?</h1>
@@ -157,6 +157,7 @@ const combinedData = staffingTable.map(d => {
         )
       ]
     })}
+
   </span>
   <p>
     Colombus Circle has an average resolution time of 18.9 minutes and higher resolution times overall.
@@ -191,4 +192,3 @@ const combinedData = staffingTable.map(d => {
       Canal Street will have the most event attendance but one of the lowest staffing levels. This station should be prioritized for increased staffing.
     </p>
 </div>
-
