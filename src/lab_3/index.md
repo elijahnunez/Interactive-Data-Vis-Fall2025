@@ -190,7 +190,7 @@ const eventColorMap = {
 };
 ```
 
-## Events vs Voter Turnout Rate (%)
+### Events vs Voter Turnout Rate (%)
 
 ```js
 
@@ -287,7 +287,7 @@ Plot.plot({
   height: 450,
   marginLeft: 140,
    marginBottom: 50,  
-  title: "Respondent Alignment by Policy",
+  title: "Post-Election Survey Responses and Policy Alignment Results",
   style: { fontFamily: "Inter, sans-serif", fontSize: 14 },
 
   x: {
@@ -345,8 +345,6 @@ Plot.plot({
 })
 
 ```
-
-#### Explanation
 
 The heatmap illustrates how respondents rated their agreement with each policy across a 1–5 scale. Affordable housing, public transit, childcare support, and small business tax policies show strong clustering in the higher agreement categories (4 and 5), indicating broad support. In contrast, police reform stands out with the greatest concentration of low agreement responses (1 and 2), making it the most polarizing or least supported policy in the survey.
 
