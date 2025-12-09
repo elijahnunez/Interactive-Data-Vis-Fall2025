@@ -190,9 +190,10 @@ const eventColorMap = {
 };
 ```
 
-## Events vs Turnout rate
+## Events vs Voter Turnout Rate (%)
 
 ```js
+
 Plot.plot({
   width: 900,
   height: 700,
@@ -200,24 +201,39 @@ Plot.plot({
     type: "mercator",
     domain: districts
   },
-  color: { legend: true },
+  color: {
+    legend: true,
+    domain: Object.keys(eventColorMap),
+    range: Object.values(eventColorMap),
+    label: "Event Type"
+  },
+  r: {
+    range: [2, 8], // Adjust these values to control min/max circle sizes
+    label: "Attendance"
+  },
   marks: [
     Plot.geo(districts, {
       fill: d => turnoutColor(turnoutsMap.get(+d.properties.BoroCD)),
       stroke: "white",
       tip: true,
-      channels: { "Turnout rate": d => turnoutsMap.get(+d.properties.BoroCD) }
+      channels: { "Turnout rate%": d => turnoutsMap.get(+d.properties.BoroCD) }
     }),
     Plot.dot(eventsClean, {
       x: "longitude",
       y: "latitude",
-      r: d => attendanceScale(d.attendance),
+      r: "attendance", // Use the field name, not a function
       fill: d => eventColorMap[d.event_type],
       stroke: "black",
       strokeWidth: 0.5,
       opacity: 0.85,
       tip: true,
-      legend: true
+      channels: { "Event Type": d => d.event_type, "Attendance": d => d.attendance }
+    }),
+    Plot.text([{x: 0, y: 0, text: "Events vs Turnout Rate%"}], {
+      frameAnchor: "top",
+      dy: -20,
+      fontSize: 24,
+      fontWeight: "bold"
     })
   ]
 })
