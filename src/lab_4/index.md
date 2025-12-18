@@ -179,11 +179,9 @@ const violationsByStation = Array.from(
 
 
 <div class="card">
-  <h1></h1>
-  <h3></h3>
+  <h1>Heavy Metal Concentration vs Distance to ChemTech</h1>
   <span>
     ${Plot.plot({
-  title: "Heavy Metal Concentration vs Distance to ChemTech",
   width: 700,
   height: 400,
   x: {
@@ -257,16 +255,18 @@ const violationsByStation = Array.from(
 })}
 
   </span>
-    <p>
-    </p>
+
 </div>
 
+
+ <p> Here we are looking at the stattions and thier contaminents relative to thier proxitimity to chem centers. as you can see the West district is the closest and is consistently the location where the heavy metal contaminates are highest. This is relevant as we see how the heavy metals affect the fishes in the areas. 
+    </p>
+
 <div class="card">
-  <h1></h1>
+  <h1>Fish Health Over Time by Species</h1>
   <h3></h3>
   <span>
     ${Plot.plot({
-  title: "Fish Health Over Time by Species",
   width: 800,
   height: 600,
   facet: {
@@ -329,16 +329,17 @@ const violationsByStation = Array.from(
 })}
 
   </span>
-    <p>
-    </p>
+  
 </div>
 
+  <p> If you look at the west fishes comparison, fishes like bass and trout who are more senstitive compares to the carp are below average in terms of size and are less often caught probably from nto being able to reproduce at the same rate as the carp. 
+    </p>
+
 <div class="card">
-  <h1></h1>
+  <h1>ChemTech Activity Periods vs Heavy Metals at West Station</h1>
   <h3></h3>
   <span>
     ${Plot.plot({
-  title: "ChemTech Activity Periods vs Heavy Metals at West Station",
   width: 900,
   height: 400,
   x: { 
@@ -429,9 +430,11 @@ const violationsByStation = Array.from(
 })}
 
   </span>
-    <p>
-    </p>
+
 </div>
+
+<p> If you look at the west fishes comparison, fishes like bass and trout who are more senstitive compares to the carp are below average in terms of size and are less often caught probably from nto being able to reproduce at the same rate as the carp. 
+ </p>
 
 <div class="card">
   <h1></h1>
@@ -507,15 +510,10 @@ const violationsByStation = Array.from(
 })}
 
   </span>
-    <p>
-    </p>
+
 </div>
 
-```js
 
-```
-
-```js
-
-```
+ <p> With this graph we see that althouh the north may be fubming due to activities happening at the the farm it never supassed regulatory limits, and the firsh cought in the north we not any less bigger. 
+</p>
 
